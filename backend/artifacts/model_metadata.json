@@ -1,0 +1,62 @@
+{
+  "model_name": "Stoxcheck Calibrated FinBERT + Word/Character Ensemble",
+  "model_version": "2.0.0",
+  "model_type": "finbert_word_character_ensemble",
+  "trained_at_utc": "2026-07-30T15:11:35.324144+00:00",
+  "task": "Target-aware three-class financial-news sentiment and positive/not-positive decision",
+  "classes": [
+    "negative",
+    "neutral",
+    "positive"
+  ],
+  "finbert_model": "ProsusAI/finbert",
+  "max_token_length": 128,
+  "validation_selected_temperature": 1.25,
+  "validation_selected_finbert_weight": 0.1,
+  "positive_threshold": 0.42,
+  "training_rows": 52134,
+  "held_out_test_rows": 5793,
+  "dataset": "data\\combined_sentiment_learning.csv",
+  "dataset_sha256": "a13a516e081254f044a693309379be507d75cea9bd24237247aa981a965984fe",
+  "artifact_sha256": "9e550d6fc2540fa9443992313d7fe017da538e556fed3b980d7282a59584ff68",
+  "split_protocol": "near-duplicate grouped train/validation/test; final sparse fit uses train+validation only",
+  "model_input_field": "text_clean; entity datasets include '[TARGET] entity'",
+  "selection_reason": "Near-best macro-F1 with stronger negative recall and the best probability calibration.",
+  "test_multiclass_metrics": {
+    "accuracy": 0.7647160365958916,
+    "macro_f1": 0.763220372416772,
+    "weighted_f1": 0.7647913652577383,
+    "negative_recall": 0.7783783783783784,
+    "multiclass_brier": 0.10981779514268,
+    "log_loss": 0.5734884736553543
+  },
+  "test_positive_metrics": {
+    "threshold": 0.42,
+    "positive_f1": 0.7782162588792423,
+    "positive_precision": 0.7447129909365559,
+    "positive_recall": 0.8148760330578513,
+    "balanced_accuracy": 0.8437125263328472,
+    "binary_accuracy": 0.8544795442775763
+  },
+  "software": {
+    "python": "3.13.7",
+    "scikit_learn": "1.8.0",
+    "pandas": "3.0.1",
+    "numpy": "2.4.2",
+    "joblib": "1.5.3",
+    "torch": "2.13.0+cpu",
+    "transformers": "4.57.6"
+  },
+  "deployment": {
+    "api_loads_transformer_at_process_start": false,
+    "collector_loads_transformer_at_process_start": true,
+    "recommended_runtime": "Cloud Run with at least 2 GiB memory; CPU is supported",
+    "network_note": "Bake/download ProsusAI/finbert during image build for deterministic startup."
+  },
+  "limitations": [
+    "Sentiment is an estimate, not investment advice.",
+    "Entity-specific inference should provide the selected company as target.",
+    "FinBERT increases memory, image size and cold-start latency compared with the sparse model.",
+    "Monitor source-specific errors, probability calibration and vocabulary drift."
+  ]
+}

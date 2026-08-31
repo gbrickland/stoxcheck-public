@@ -1,0 +1,37 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "temporary_observations",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "ticker", "order": "ASCENDING"},
+        {"fieldPath": "expires_at", "order": "DESCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "hourly_sentiment",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "ticker", "order": "ASCENDING"},
+        {"fieldPath": "window_start", "order": "DESCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "daily_sentiment",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "ticker", "order": "ASCENDING"},
+        {"fieldPath": "window_start", "order": "DESCENDING"}
+      ]
+    },
+    {
+      "collectionGroup": "weekly_sentiment",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {"fieldPath": "ticker", "order": "ASCENDING"},
+        {"fieldPath": "window_start", "order": "DESCENDING"}
+      ]
+    }
+  ],
+  "fieldOverrides": []
+}
